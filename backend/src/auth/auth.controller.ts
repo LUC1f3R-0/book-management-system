@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-  UnauthorizedException,
-} from '@nestjs/common';
+import {  Body,  Controller,  Get,  Post,  Req,  Res,  UseGuards,  UnauthorizedException,} from '@nestjs/common';
 import { RegisterDto, LoginDto, LogoutDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { Response, Request } from 'express';
@@ -65,7 +56,6 @@ export class AuthController {
     const { accessToken, refreshToken: newRefreshToken } =
       await this.authService.refreshTokens(refreshToken);
 
-    // Set new tokens as cookies
     res.cookie('access_token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
