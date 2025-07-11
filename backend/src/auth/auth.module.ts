@@ -4,16 +4,17 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { PrismaService } from '../prisma.service';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'fallback_secret_for_dev',
+      secret: process.env.ACCESS_TOKEN_SECRET,
       signOptions: { expiresIn: '15m' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtAuthGuard, PrismaService],
+  providers: [AuthService, JwtAuthGuard, JwtStrategy, PrismaService],
   exports: [JwtAuthGuard, AuthService],
 })
 export class AuthModule {}
