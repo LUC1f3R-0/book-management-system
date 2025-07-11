@@ -1,36 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  AppBar,
-  Toolbar,
-  Grid,
-  Card,
-  CardContent,
-  Chip,
-  useScrollTrigger,
-  Slide,
-  Fade,
-  Paper,
-  IconButton,
-  Stack
-} from '@mui/material';
+import { Box, Container, Typography, Button, AppBar, Toolbar, Grid, Card, CardContent, Chip, useScrollTrigger, Slide, Fade, Paper, IconButton, Stack } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import {
-  ArrowForward,
-  Star,
-  FlashOn,
-  Security,
-  Language,
-  KeyboardArrowDown
-} from '@mui/icons-material';
+import { ArrowForward, Star, FlashOn, Security, Language, KeyboardArrowDown } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
-// Styled components
 const GradientBackground = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   background: 'linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%)',
@@ -161,10 +136,10 @@ export default function HomePage() {
   //   alert('In a real Next.js app, this would navigate to /login');
   // };
 
-  const handleRegister = () => {
-    console.log('Navigating to /register');
-    alert('In a real Next.js app, this would navigate to /register');
-  };
+  // const () => { router.push('/register') } = () => {
+  //   console.log('Navigating to /register');
+  //   alert('In a real Next.js app, this would navigate to /register');
+  // };
 
   return (
     <GradientBackground>
@@ -213,7 +188,7 @@ export default function HomePage() {
               >
                 Login
               </Button>
-              <GradientButton onClick={handleRegister}>
+              <GradientButton onClick={() => { router.push('/register') }}>
                 Get Started
               </GradientButton>
             </Stack>
@@ -282,7 +257,7 @@ export default function HomePage() {
               sx={{ justifyContent: 'center', mb: 8 }}
             >
               <GradientButton
-                onClick={handleRegister}
+                onClick={() => { router.push('/register') }}
                 endIcon={<ArrowForward />}
                 size="large"
               >
@@ -458,7 +433,7 @@ export default function HomePage() {
             sx={{ justifyContent: 'center' }}
           >
             <GradientButton
-              onClick={handleRegister}
+              onClick={() => { router.push('/register') }}
               endIcon={<ArrowForward />}
               size="large"
             >
