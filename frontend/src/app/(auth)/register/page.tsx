@@ -42,7 +42,6 @@ export default function RegisterForm() {
             setMessage({ type: 'success', text: message || 'Registered successfully' });
             setFormData({ username: '', email: '', password: '' });
 
-            // Redirect to login after 2 seconds
             setTimeout(() => {
                 router.push('/login');
             }, 2000);

@@ -58,7 +58,6 @@ export class AuthService {
       expiresIn: '30d',
     });
 
-    // Store hashed refresh token in DB
     const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
     await this.prisma.user.update({
       where: { id: user.id },
@@ -70,12 +69,10 @@ export class AuthService {
 
   async refreshTokens(refreshToken: string) {
     try {
-      // Verify the refresh token
       const payload = this.jwtService.verify(refreshToken, {
         secret: process.env.REFRESH_TOKEN_SECRET,
       });
 
-      // Find the user and verify the refresh token
       const user = await this.prisma.user.findUnique({
         where: { id: payload.sub },
       });
@@ -84,7 +81,6 @@ export class AuthService {
         throw new UnauthorizedException('Invalid refresh token');
       }
 
-      // Verify the stored refresh token matches
       const tokenMatches = await bcrypt.compare(
         refreshToken,
         user.refreshToken,
@@ -93,7 +89,6 @@ export class AuthService {
         throw new UnauthorizedException('Invalid refresh token');
       }
 
-      // Generate new tokens
       const newPayload = { sub: user.id, email: user.email };
 
       const newAccessToken = this.jwtService.sign(newPayload, {
@@ -106,7 +101,6 @@ export class AuthService {
         expiresIn: '30d',
       });
 
-      // Update the refresh token in the database
       const hashedNewRefreshToken = await bcrypt.hash(newRefreshToken, 10);
       await this.prisma.user.update({
         where: { id: user.id },

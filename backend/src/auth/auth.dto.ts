@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-//register objects
+
 export class RegisterDto {
   @IsString()
   username: string;
